@@ -1,0 +1,72 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
+const Login: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    // const navigate = useNavigate();
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Authentication logic goes here.
+        console.log('Email:', email, 'Password:', password);
+        // Example: navigate('/dashboard');
+    };
+
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
+                <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="example@mail.com"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                            required
+                        />
+                    </div>
+                    <div className="relative">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                        <input
+                            id="password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Your password"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+                            required
+                        />
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
+                    >
+                        Login
+                    </button>
+                </form>
+                <div className="mt-4 text-center">
+                    <span>Don't have an account? </span>
+                    <Link to="/register" className="text-blue-500 hover:underline">
+                        Register here
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
