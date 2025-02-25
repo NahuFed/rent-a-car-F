@@ -1,50 +1,80 @@
-# React + TypeScript + Vite
+Car Rental - 🚗
+This project is a web application designed to streamline car rental and management operations for a car rental company based in Australia. The system enables users to rent cars efficiently while providing administrators with tools to manage inventory and rental requests.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Overview
+The system provides a seamless experience for both users and administrators, featuring the following capabilities:
 
-Currently, two official plugins are available:
+For Users:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Sign up, log in, recover password, and log out.
+Browse a catalog of available cars with detailed descriptions and images.
+Submit rental requests with required document uploads.
+Access a historical list of previous rental requests.
+For Administrators:
 
-## Expanding the ESLint configuration
+Add, edit, delete, and manage car listings, including uploading car images.
+Review, approve, or reject rental requests based on user-provided documents.
+View the complete history of users' rental requests.
+Payment Integration:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Use of the Stellar Network for secure cryptocurrency payments in USDC.
+Real-time conversion check to ensure users have sufficient funds before completing transactions.
+📦 Tech Stack
+This PoC leverages modern web development technologies and tools:
 
-- Configure the top-level `parserOptions` property like this:
+Frontend: React with TypeScript and Tailwind UI.
+Backend: NestJS with TypeScript.
+Database: MySQL.
+Infrastructure:
+AWS S3: For storing car images and user-uploaded documents.
+AWS Cognito: For secure authentication and authorization.
+LocalStack: To emulate AWS services during development.
+🔧 Installation and Setup
+Follow these steps to set up the project locally:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Prerequisites
+Ensure you have the following installed on your system:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Node.js >= 18
+MySQL database
+Stellar wallet account for cryptocurrency transactions.
+Steps
+Clone the repository to your local machine:
+git clone https://github.com/nahufed/rent-a-car.git
+cd rent-a-car
+Install the required dependencies:
+npm install
+Configure the environment variables by creating a .env file in the project root and adding the following:
+MySQL database credentials (DB_HOST, DB_USER, DB_PASS, DB_NAME).
+AWS credentials for S3 (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION).
+Stellar wallet keys (STELLAR_PUBLIC_KEY, STELLAR_SECRET_KEY).
+Start the application:
+npm run start
+📑 System Architecture
+The application has a modular design to separate responsibilities between users, administrators, rentals, and car management. The system architecture includes:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Frontend: A responsive web interface built with React.
+Backend: A RESTful API built with NestJS for handling requests and managing data.
+Database: MySQL for data storage, including users, cars, and rental requests.
+File Storage: AWS S3 for managing user-uploaded documents and car images.
+View a detailed system diagram here.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+🛠 Work in Progress
+This PoC is under active development, with the following features planned:
+
+Responsive design using Figma for an optimized user experience.
+Improved user flows for payment processing and document uploads.
+Expansion of admin tools to manage roles and permissions dynamically.
+✨ Contributing
+We welcome contributions to improve the project! Follow these steps to contribute:
+
+Fork this repository to your GitHub account.
+Create a new branch for your feature or bugfix:
+git checkout -b my-feature
+Commit your changes with a descriptive message:
+git commit -m "Add feature X"
+Push your changes to your fork:
+git push origin my-feature
+Submit a pull request to the main repository.
+📝 License
+This project is protected under a custom license. For more information about usage or permissions, please contact the development team.
