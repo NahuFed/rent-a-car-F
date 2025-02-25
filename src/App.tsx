@@ -1,35 +1,27 @@
-
 import "./App.css";
-import Home from "./pages/home/Home";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Services from "./pages/home/Services";
-import Contact from "./components/Contact";
-import UserDashboard from "./pages/user/User-dashboard";
+import { AuthProvider } from "./context/AuthContext";
+import routes from "./routes/Routes";
 
 function App() {
   return (
     <>
-    <BrowserRouter>
-    <Header />
-    <main>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />}/>
-      <Route path="/user-dashboard" element={<UserDashboard />}/>
-    </Routes>
-    </main>
-    <Footer />
-    </BrowserRouter>
-    </> 
-
-
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          <main>
+            <Routes>
+              {routes.map((route, index) => (
+                <Route key={index} path={route.path} element={route.element} />
+              ))}
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
+    </>
   );
 }
 
