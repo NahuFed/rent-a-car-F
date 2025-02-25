@@ -5,16 +5,21 @@ import Contact from "../components/Contact";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import UserDashboard from "../pages/user/User-dashboard";
-import AdminDashboard from '../pages/admin/Admin-dashboard';
-import ForgotPassword from '../pages/auth/ForgotPassword';
-import ConfirmPassword from '../pages/auth/ConfirmPassword';
+import ForgotPassword from "../pages/auth/ForgotPassword";
+import ConfirmPassword from "../pages/auth/ConfirmPassword";
 import PrivateRoute from "./PrivateRoute";
+
+// Rutas de administración adicionales
+import AdminDashboard from '../pages/admin/Admin-dashboard';
+import ManageCars from '../pages/admin/components/cars/ManageCars';
+;
 
 interface Route {
     path: string;
     element: React.ReactNode;
     isPrivate?: boolean;
     requiredRole?: string;
+    children?: Route[];
 }
 
 const routes: Route[] = [
@@ -25,8 +30,19 @@ const routes: Route[] = [
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
     { path: "/confirm-password", element: <ConfirmPassword /> },
-    { path: "/user-dashboard", element: <PrivateRoute element={<UserDashboard />} requiredRole="user" />, isPrivate: true },
-    { path: "/admin-dashboard", element: <PrivateRoute element={<AdminDashboard />} requiredRole="admin" />, isPrivate: true },
+    { 
+        path: "/user-dashboard", 
+        element: <PrivateRoute element={<UserDashboard />} requiredRole="user" />, 
+        isPrivate: true 
+    },
+    { 
+        path: "/admin", 
+        element: <PrivateRoute element={<AdminDashboard />} requiredRole="admin" />, 
+        isPrivate: true,
+        children: [
+            { path: "cars", element: <ManageCars /> },            
+        ]
+    }
 ];
 
 export default routes;

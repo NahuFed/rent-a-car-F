@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
 
 interface AuthContextProps {
     isAuthenticated: boolean;
@@ -49,4 +49,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             {children}
         </AuthContext.Provider>
     );
+    
+};
+export const useAuth = () => {
+    return useContext(AuthContext);
 };

@@ -8,4 +8,8 @@ export const URI_CHANGE_PASSWORD = 'http://localhost:3000/api/v1/auth/change-pas
 
 export const URI_CONFIRM_PASSWORD = 'http://localhost:3000/api/v1/auth/confirm-password'
 
+export const URI_USERS = 'http://localhost:3000/user'
+
+export const URI_CARS = 'http://localhost:3000/car'
+
 

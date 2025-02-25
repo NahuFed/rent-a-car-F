@@ -37,7 +37,7 @@ const Header: React.FC = () => {
                             <>
                                 {role === 'admin' && (
                                     <li>
-                                        <Link to="/admin-dashboard" className="hover:text-gray-300">
+                                        <Link to="/admin" className="hover:text-gray-300">
                                             Admin Dashboard
                                         </Link>
                                     </li>
