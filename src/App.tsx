@@ -8,6 +8,7 @@ import Register from "./pages/auth/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Services from "./pages/home/Services";
 import Contact from "./components/Contact";
+import UserDashboard from "./pages/user/User-dashboard";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
       <Route path="/services" element={<Services />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register />}/>
+      <Route path="/user-dashboard" element={<UserDashboard />}/>
     </Routes>
     </main>
     <Footer />

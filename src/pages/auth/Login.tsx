@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { URI_LOGIN } from '../../constants/endpoints-API';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const setUserRole = (role: string) => localStorage.setItem('role', role);
+    const setToken = (token: string) => localStorage.setItem('token', token);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Authentication logic goes here.
-        console.log('Email:', email, 'Password:', password);
-        // Example: navigate('/dashboard');
+        try {
+            const response = await axios.post(URI_LOGIN, {
+                email: email,
+                password: password
+            });
+
+            const { accessToken, role } = response.data;
+            setToken(accessToken);
+            setUserRole(role);
+
+            if (role === 'admin') {
+                navigate('/admin-dashboard');
+            } else {
+                navigate('/user-dashboard');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+        }
     };
 
     return (
