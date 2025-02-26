@@ -6,6 +6,7 @@ import UpdateCar from './UpdateCar';
 import Modal from 'react-modal';
 import { URI_CARS } from '../../../../constants/endpoints-API';
 import Swal from 'sweetalert2';
+import { UpdateCarDto } from '../../../../types/car/updateCarDto';
 
 Modal.setAppElement('#root'); // Asegúrate de que el elemento raíz de tu aplicación esté configurado correctamente
 
@@ -31,7 +32,7 @@ const ManageCars: React.FC = () => {
     const [cars, setCars] = useState([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-    const [selectedCar, setSelectedCar] = useState(null);
+    const [selectedCar, setSelectedCar] = useState<UpdateCarDto | null>(null);
 
     useEffect(() => {
         fetchCars();
@@ -74,7 +75,7 @@ const ManageCars: React.FC = () => {
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Manage Cars</h1>
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
+                    className="btn-admin bg-blue-500 text-white px-4 py-2 rounded flex items-center"
                     onClick={() => setIsCreateModalOpen(true)}
                 >
                     <FaPlus className="mr-2" /> Create Car
@@ -104,12 +105,12 @@ const ManageCars: React.FC = () => {
                             <td className="py-2 border-r">{car.color}</td>
                             <td className="py-2 border-r">{car.passengers}</td>
                             <td className="py-2 border-r">{car.ac ? 'Yes' : 'No'}</td>
-                            <td className="py-2 border-r">{car.princePerDay}</td>
+                            <td className="py-2 border-r">{car.pricePerDay}</td>
                             <td className="py-2 border-r">{new Date(car.craetedAt).toLocaleDateString()}</td>
                             <td className="py-2 border-r">{new Date(car.updatedAt).toLocaleDateString()}</td>
                             <td className="py-2 flex space-x-2">
                                 <button
-                                    className="bg-yellow-500 text-white px-2 py-1 rounded flex items-center"
+                                    className="btn-admin bg-yellow-500 text-white px-2 py-1 rounded flex items-center"
                                     onClick={() => {
                                         setSelectedCar(car);
                                         setIsUpdateModalOpen(true);
@@ -118,7 +119,7 @@ const ManageCars: React.FC = () => {
                                     <FaEdit />
                                 </button>
                                 <button
-                                    className="bg-red-500 text-white px-2 py-1 rounded flex items-center"
+                                    className="btn-admin bg-red-500 text-white px-2 py-1 rounded flex items-center"
                                     onClick={() => handleDelete(car.id)}
                                 >
                                     <FaTrash />

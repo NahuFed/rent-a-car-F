@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { FaCar, FaClipboardList } from 'react-icons/fa';
+import './admin.css';
 
 const AdminDashboard: React.FC = () => {
     return (

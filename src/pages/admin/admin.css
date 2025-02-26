@@ -1,0 +1,21 @@
+/* Button animation */
+.btn-admin {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+.btn-admin :hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal transition animations */
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}

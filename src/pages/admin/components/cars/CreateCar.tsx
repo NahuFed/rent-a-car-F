@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { URI_CARS } from '../../../../constants/endpoints-API';
+import { CreateCarDto } from '../../../../types/car/createCarDto';
 
 interface CreateCarProps {
     onClose: () => void;
@@ -9,7 +10,7 @@ interface CreateCarProps {
 }
 
 const CreateCar: React.FC<CreateCarProps> = ({ onClose, onCarCreated }) => {
-    const [car, setCar] = useState({
+    const [car, setCar] = useState<CreateCarDto>({
         brand: '',
         model: '',
         color: '',
@@ -67,10 +68,10 @@ const CreateCar: React.FC<CreateCarProps> = ({ onClose, onCarCreated }) => {
                     <label>Price Per Day:</label>
                     <input type="number" name="pricePerDay" value={car.pricePerDay} onChange={handleChange} required style={{ border: '1px solid #ccc', padding: '5px', width: '100%' }} />
                 </div>
-                <button type="submit" style={{ marginRight: '10px', padding: '10px 20px', backgroundColor: '#4CAF50', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                <button type="submit"className='btn-admin' style={{ marginRight: '10px', padding: '10px 20px', backgroundColor: '#4CAF50', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
                     Create Car
                 </button>
-                <button type="button" onClick={onClose} style={{ padding: '10px 20px', backgroundColor: '#f44336', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+                <button type="button" className='btn-admin' onClick={onClose} style={{ padding: '10px 20px', backgroundColor: '#f44336', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
                     Close
                 </button>
             </form>
