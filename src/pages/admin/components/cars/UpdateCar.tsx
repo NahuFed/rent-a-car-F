@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useParams } from 'react-router-dom';
 import { URI_CARS } from '../../../../constants/endpoints-API';
 import { UpdateCarDto } from '../../../../types/car/updateCarDto';
-
 
 interface UpdateCarProps {
     car?: UpdateCarDto | null; 
@@ -13,7 +11,6 @@ interface UpdateCarProps {
 }
 
 const UpdateCar: React.FC<UpdateCarProps> = ({ car, onClose, onCarUpdated }) => {
-    const { id } = useParams<{ id: string }>();
     const [carData, setCarData] = useState<UpdateCarDto>({
         brand: '',
         model: '',
@@ -25,22 +22,11 @@ const UpdateCar: React.FC<UpdateCarProps> = ({ car, onClose, onCarUpdated }) => 
         updatedAt: new Date(),
     });
 
-    
     useEffect(() => {
         if (car) {
             setCarData(car);
-        } else if (id) {
-      
-            axios
-                .get(`${URI_CARS}/${id}`)
-                .then(response => {
-                    setCarData(response.data);
-                })
-                .catch(error => {
-                    console.error('There was an error fetching the car data!', error);
-                });
         }
-    }, [car, id]);
+    }, [car]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
@@ -52,13 +38,18 @@ const UpdateCar: React.FC<UpdateCarProps> = ({ car, onClose, onCarUpdated }) => 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!car || !car.id) {
+            Swal.fire("Error", "No car selected for update", "error");
+            return;
+        }
         try {
-            const response = await axios.put(`${URI_CARS}/${id}`, carData);
+            const response = await axios.patch(`${URI_CARS}/${car.id}`, carData);
             if (response.status === 200 || response.status === 204) {
                 Swal.fire("Success", "Car updated successfully", "success");
                 await onCarUpdated();
             }
         } catch (error) {
+            console.log(car.id)
             console.error('Error updating car:', error);
             Swal.fire("Error", "There was an error updating the car", "error");
         }

@@ -8,6 +8,7 @@ import UserDashboard from "../pages/user/User-dashboard";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ConfirmPassword from "../pages/auth/ConfirmPassword";
 import PrivateRoute from "./PrivateRoute";
+import ManagePictures from '../pages/admin/components/car-pictures/ManagePictures';
 
 // Rutas de administración adicionales
 import AdminDashboard from '../pages/admin/Admin-dashboard';
@@ -41,6 +42,7 @@ const routes: Route[] = [
         isPrivate: true,
         children: [
             { path: "cars", element: <ManageCars /> },            
+            { path: "cars/:id/pictures", element: <ManagePictures /> },
         ]
     }
 ];

@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import { URI_CARS } from '../../../../constants/endpoints-API';
 import Swal from 'sweetalert2';
 import { UpdateCarDto } from '../../../../types/car/updateCarDto';
+import { Link } from 'react-router-dom';
 
 Modal.setAppElement('#root'); // Asegúrate de que el elemento raíz de tu aplicación esté configurado correctamente
 
@@ -71,6 +72,8 @@ const ManageCars: React.FC = () => {
     };
 
     return (
+
+
         <div className="container mx-auto ">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Manage Cars</h1>
@@ -108,6 +111,14 @@ const ManageCars: React.FC = () => {
                             <td className="py-2 border-r">{car.pricePerDay}</td>
                             <td className="py-2 border-r">{new Date(car.craetedAt).toLocaleDateString()}</td>
                             <td className="py-2 border-r">{new Date(car.updatedAt).toLocaleDateString()}</td>
+                            <td className="py-2 border-r">
+                <Link 
+                    to={`/admin/cars/${car.id}/pictures/`}
+                    className="btn-admin bg-blue-500 text-white px-2 py-1 rounded flex items-center"
+                >
+                    Gallery
+                </Link>
+            </td>
                             <td className="py-2 flex space-x-2">
                                 <button
                                     className="btn-admin bg-yellow-500 text-white px-2 py-1 rounded flex items-center"

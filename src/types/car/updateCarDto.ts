@@ -1,4 +1,5 @@
 export interface UpdateCarDto {
+    id?: number;
     brand?: string;
     model?: string;
     color?: string;
