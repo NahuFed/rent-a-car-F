@@ -17,3 +17,14 @@ export const URI_PICTURES = 'http://localhost:3000/picture'
 export const URI_GET_PICTURES_BY_CAR_AND_TYPE = (id: number, type: string) => `http://localhost:3000/picture/cars/${id}?type=${type}`;
 
 export const URI_GET_PICTURES_BY_CAR = (id: number) => `http://localhost:3000/picture/cars/${id}`;
+
+export const URI_RENTS = 'http://localhost:3000/rent'
+
+export const URI_PENDING_RENTS = 'http://localhost:3000/rent/status/pending'
+
+export const URI_ACCEPTED_RENTS = 'http://localhost:3000/rent/status/accepted'
+
+export const URI_REJECTED_RENTS = 'http://localhost:3000/rent/status/rejected'
+
+export const URI_ADMIT_RENT = (id: number) => `http://localhost:3000/rent/requests/${id}/admit`
+export const URI_REJECT_RENT = (id: number) => `http://localhost:3000/rent/requests/${id}/reject`

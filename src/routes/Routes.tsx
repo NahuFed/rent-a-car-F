@@ -13,6 +13,10 @@ import ManagePictures from '../pages/admin/components/car-pictures/ManagePicture
 // Rutas de administración adicionales
 import AdminDashboard from '../pages/admin/Admin-dashboard';
 import ManageCars from '../pages/admin/components/cars/ManageCars';
+import PendingRents from '../pages/admin/components/rent-requests/PendingRents';
+import AcceptedRents from '../pages/admin/components/rent-requests/AcceptedRents';
+import RejectedRents from '../pages/admin/components/rent-requests/RejectedRents';
+
 ;
 
 interface Route {
@@ -42,7 +46,11 @@ const routes: Route[] = [
         isPrivate: true,
         children: [
             { path: "cars", element: <ManageCars /> },            
-            { path: "cars/:id/pictures", element: <ManagePictures /> },
+            { path: "cars/:id/pictures", element: <ManagePictures /> },            
+            {path: "/admin/rental-requests/pending", element: <PendingRents/>},
+            {path: "/admin/rental-requests/accepted", element: <AcceptedRents />},
+            {path: "/admin/rental-requests/rejected", element: <RejectedRents />},
+            
         ]
     }
 ];

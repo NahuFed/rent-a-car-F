@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect, ReactNode, useContext } from
 interface AuthContextProps {
     isAuthenticated: boolean;
     role: string | null;
+    loading: boolean;
     login: (role: string) => void;
     logout: () => void;
 }
@@ -14,6 +15,7 @@ interface AuthProviderProps {
 export const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,
     role: null,
+    loading: true,
     login: () => {},
     logout: () => {},
 });
@@ -21,14 +23,20 @@ export const AuthContext = createContext<AuthContextProps>({
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [role, setRole] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userRole = localStorage.getItem('role');
-        if (token && userRole) {
-            setIsAuthenticated(true);
-            setRole(userRole);
-        }
+
+        
+        setTimeout(() => {
+            if (token && userRole) {
+                setIsAuthenticated(true);
+                setRole(userRole);
+            }
+            setLoading(false);
+        }, 300);
     }, []);
 
     const login = (userRole: string) => {
@@ -45,12 +53,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, role, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, role, loading, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
-    
 };
+
 export const useAuth = () => {
     return useContext(AuthContext);
 };

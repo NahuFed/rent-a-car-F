@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { URI_PICTURES } from '../../../../constants/endpoints-API';
-import { CreatePictureDto } from '../../../../types/car-pictures/createPictureDtos';
+import { CreatePictureDto } from '../../../../types/car-pictures/createPictureDto';
 import { CarPictureType } from '../../../../types/car-pictures/carPictureType';
 import { useParams } from 'react-router-dom';
 
