@@ -10,6 +10,8 @@ export const URI_CONFIRM_PASSWORD = 'http://localhost:3000/api/v1/auth/confirm-p
 
 export const URI_USERS = 'http://localhost:3000/user'
 
+export const URI_UPDATE_USER = (id: number) => `http://localhost:3000/user/${id}`
+
 export const URI_GET_USER_BY_EMAIL = (email: string) => `http://localhost:3000/user/email/${email}`
 
 export const URI_CARS = 'http://localhost:3000/car'
@@ -33,3 +35,5 @@ export const URI_ADMIT_RENT = (id: number) => `http://localhost:3000/rent/reques
 export const URI_REJECT_RENT = (id: number) => `http://localhost:3000/rent/requests/${id}/reject`
 
 export const URI_UNAVAILABLE_DATES = (id: number) => `http://localhost:3000/rent/availability/${id}`
+
+export const URI_GET_USER_HISTORY = (id: number) => `http://localhost:3000/rent/user/${id}/history`

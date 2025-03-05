@@ -36,34 +36,34 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [userId, setUserId] = useState<string | null>(null);
 
+    const fetchUserId = async (email: string) => {
+        try {
+            const response = await axios.get(URI_GET_USER_BY_EMAIL(email));                
+            setUserId(response.data.id);
+        } catch (error) {
+            console.error('Error fetching user ID:', error);
+        }
+    };
+
     useEffect(() => {
         const token = localStorage.getItem('token');
-        const userRole = localStorage.getItem('role');
-
-        const fetchUserId = async (email: string) => {
-            try {
-                const response = await axios.get(URI_GET_USER_BY_EMAIL(email));                
-                setUserId(response.data.id);
-            } catch (error) {
-                console.error('Error fetching user ID:', error);
-            }
-        };
+        const userRole = localStorage.getItem('role');       
 
         setTimeout(() => {
             if (token && userRole) {
-                const decodedToken: DecodedToken = jwtDecode(token);
-              
+                const decodedToken: DecodedToken = jwtDecode(token);              
                 setIsAuthenticated(true);
                 setRole(userRole);
                 fetchUserId(decodedToken.username);
             }
             setLoading(false);
         }, 300);
-    }, []);
+    }, [isAuthenticated]);
 
     const login = (userRole: string) => {
         setIsAuthenticated(true);
         setRole(userRole);
+        
     };
 
     const logout = () => {
