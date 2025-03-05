@@ -18,6 +18,8 @@ import AcceptedRents from "../pages/admin/components/rent-requests/AcceptedRents
 import RejectedRents from "../pages/admin/components/rent-requests/RejectedRents";
 import BrowseCars from "../pages/user/components/Browse-cars";
 import RentForm from "../pages/user/components/Rent-Form";
+import MyProfile from "../pages/user/components/My-profile";
+import RentalHistory from "../pages/user/components/Rental-history";
 
 interface Route {
   path: string;
@@ -47,6 +49,14 @@ const routes: Route[] = [
   {
     path: "/rent-form/:carId",
     element: <PrivateRoute element={<RentForm />} requiredRole="user" />,
+  },
+  {
+    path: "/my-profile",
+    element: <PrivateRoute element={< MyProfile/>} requiredRole="user" />,
+  },
+  {
+    path: "/rental-history",
+    element: <PrivateRoute element={<RentalHistory />} requiredRole="user" />,
   },
 
   {
