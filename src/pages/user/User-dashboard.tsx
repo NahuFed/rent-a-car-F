@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const UserDashboard: React.FC = () => {
     return (
@@ -8,6 +10,7 @@ const UserDashboard: React.FC = () => {
                 <div className="bg-white p-4 rounded shadow">
                     <h2 className="text-xl font-semibold mb-2">Browse Cars</h2>
                     <p>Explore our catalog of available cars and find the perfect one for your needs.</p>
+                    <Link to="/browse-cars" className="text-blue-500 hover:underline">Go to Browse Cars</Link>
                 </div>
                 <div className="bg-white p-4 rounded shadow">
                     <h2 className="text-xl font-semibold mb-2">Rental Requests</h2>
