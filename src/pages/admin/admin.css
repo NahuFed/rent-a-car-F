@@ -1,0 +1,59 @@
+/* Button animation */
+.btn-admin {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+.btn-admin :hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal transition animations */
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+/* Separator between sidebar items */
+.sidebar-item {
+  border-bottom: 1px solid #4a5568; /* color similar a gris oscuro */
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Animación para la sublista de rentas */
+.rent-requests-sublist {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.rent-requests-sublist.open {
+  max-height: 500px; /* valor suficientemente alto */
+  opacity: 1;
+}
+
+.loading-spinner {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 0.3s linear infinite;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

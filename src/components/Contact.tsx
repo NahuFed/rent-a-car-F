@@ -6,8 +6,7 @@ const Contact: React.FC = () => {
     const [message, setMessage] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle form submission logic here
+        e.preventDefault();        
         console.log({ email, subject, message });
     };
 

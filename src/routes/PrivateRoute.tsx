@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 interface PrivateRouteProps {
     element: React.ReactNode;
@@ -8,14 +8,18 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ element, requiredRole }) => {
-    const { isAuthenticated, role } = useContext(AuthContext);
+    const { isAuthenticated, role, loading } = useAuth();
+
+    if (loading) {
+        return <div className='loading-spinner'></div>;
+    }
 
     if (!isAuthenticated) {
         return <Navigate to="/login" />;
     }
 
     if (requiredRole && role !== requiredRole) {
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     }
 
     return <>{element}</>;
