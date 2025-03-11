@@ -20,8 +20,7 @@ const AdminDashboard: React.FC = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
-        });
-        // Asumiendo que el endpoint devuelve un arreglo de rentas pendientes
+        });        
         setPendingCount(response.data.length);
       } catch (error) {
         console.error('Error fetching pending rents count:', error);

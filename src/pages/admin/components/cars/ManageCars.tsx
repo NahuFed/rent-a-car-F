@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { UpdateCarDto } from '../../../../types/car/updateCarDto';
 import { Link } from 'react-router-dom';
 
-Modal.setAppElement('#root'); // Asegúrate de que el elemento raíz de tu aplicación esté configurado correctamente
+Modal.setAppElement('#root');
 
 const customStyles = {
     content: {
@@ -19,13 +19,13 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'rgba(255, 255, 255, 0)', // Fondo blanco con transparencia
+        backgroundColor: 'rgba(255, 255, 255, 0)', 
         border: 'none',
         borderRadius: '10px',
         padding: '20px',
     },
     overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo oscuro con transparencia
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
     },
 };
 
@@ -62,7 +62,7 @@ const ManageCars: React.FC = () => {
             try {
                 await axios.delete(`${URI_CARS}/${id}`);
                 Swal.fire("Deleted!", "Car deleted successfully", "success");
-                // Llama a la función para actualizar la lista de autos
+                
                 fetchCars();
             } catch (error) {
                 console.error("Error deleting car:", error);

@@ -1,6 +1,4 @@
-export interface Role {
-    name: string;
-}
+import {User} from '../user/userType';
 
 export interface Car {
     id: number;
@@ -10,22 +8,11 @@ export interface Car {
     passengers: number;
     ac: boolean;
     pricePerDay: number;
-    createdAt: string; // Nota: en el JSON aparece "craetedAt", asumiendo que es "createdAt"
+    createdAt: string; 
     updatedAt: string;
 }
 
-export interface User {
-    id: number;
-    firstName: string;
-    lastName: string;
-    dob: string;
-    email: string;
-    address: string;
-    country: string;
-    createdAt: string;
-    updatedAt: string;
-    role: Role;
-}
+
 
 export interface RentType {
     id: number;

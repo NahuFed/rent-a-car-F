@@ -7,7 +7,6 @@ import { useAuth } from '../../../context/AuthContext';
 import { carType } from '../../../types/car/carType';
 import { URI_CARS, URI_RENTS, URI_UNAVAILABLE_DATES, URI_GET_PICTURES_BY_CAR } from '../../../constants/endpoints-API';
 import Swal from 'sweetalert2';
-import ImageCarousel from './ImageCarousel';
 
 interface DateRange {
     start: string;
@@ -47,7 +46,7 @@ const RentForm: React.FC = () => {
         const fetchPictures = async () => {
             try {
                 const response = await axios.get(URI_GET_PICTURES_BY_CAR(Number(carId)));
-                // Se asume que la respuesta contiene objetos con la propiedad src.
+           
                 setPictures(response.data.map((p: { src: string }) => p.src));
             } catch (error) {
                 console.error('Error fetching car pictures:', error);
@@ -142,7 +141,7 @@ const RentForm: React.FC = () => {
                     <p>Price per day: ${car.pricePerDay}</p>
                 </div>
             )}
-            {/* Contenedor con dos columnas: Carrusel y Formulario */}
+           
            
                 <div className="form-container" style={{ flex: 1 }}>
                     <form onSubmit={handleSubmit}>

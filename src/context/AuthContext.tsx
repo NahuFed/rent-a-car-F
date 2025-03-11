@@ -17,8 +17,7 @@ interface AuthProviderProps {
 }
 
 interface DecodedToken {
-    username: string;
-    // otros campos del token si es necesario
+    username: string;    
 }
 
 export const AuthContext = createContext<AuthContextProps>({

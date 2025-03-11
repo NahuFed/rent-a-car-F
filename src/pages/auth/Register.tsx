@@ -35,9 +35,9 @@ const Register: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Aquí puedes realizar la llamada a la API para registrar al usuario
+  
     console.log('Registering user with data:', formData);
-    // Luego de un registro exitoso, redirige al usuario (por ejemplo, a la página de login)
+
     navigate('/login');
   };
 

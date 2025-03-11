@@ -11,7 +11,6 @@ const MyProfile: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // Estados para el formulario
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
@@ -22,13 +21,12 @@ const MyProfile: React.FC = () => {
         const fetchUser = async () => {
             if (userId) {
                 try {
-                    // Se asume que el endpoint URI_UPDATE_USER acepta GET para obtener los datos del usuario
+                  
                     const response = await axios.get(URI_UPDATE_USER(Number(userId)));
                     const fetchedUser: User = response.data;
                     setUser(fetchedUser);
                     setFirstName(fetchedUser.firstName);
-                    setLastName(fetchedUser.lastName);
-                    // Extrae solo la parte de la fecha (yyyy-MM-dd)
+                    setLastName(fetchedUser.lastName);                  
                     setDob(fetchedUser.dob.split('T')[0]);
                     setAddress(fetchedUser.address);
                     setCountry(fetchedUser.country);

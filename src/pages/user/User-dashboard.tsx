@@ -20,6 +20,10 @@ const UserDashboard: React.FC = () => {
                     <h2 className="text-xl font-semibold mb-2">Profile</h2>
                     <p>Manage your account details and view your rental history.</p>
                 </Link>
+                <Link to= "/documents" className="bg-white p-4 rounded shadow">
+                    <h2 className="text-xl font-semibold mb-2">Documents</h2>
+                    <p>Manage your personal documents relevant and necessary for renting a car.</p>
+                </Link>
             </div>
         </div>
     );

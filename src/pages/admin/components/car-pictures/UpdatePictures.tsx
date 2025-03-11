@@ -44,7 +44,7 @@ const UpdatePictures: React.FC<UpdatePicturesProps> = ({ picture, onClose, onPic
         } else if (name === 'date') {
             setPictureData(prevPicture => ({
                 ...prevPicture,
-                [name]: new Date(value), // Convertir el valor a un objeto Date
+                [name]: new Date(value),
             }));
         } else {
             setPictureData(prevPicture => ({

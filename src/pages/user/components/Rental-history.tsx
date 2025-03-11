@@ -25,7 +25,7 @@ interface RentalHistoryItem {
         craetedAt: string;
         updatedAt: string;
     };
-    // Se omiten otros campos para simplificar, agregar según necesites
+    
 }
 
 const RentalHistory: React.FC = () => {

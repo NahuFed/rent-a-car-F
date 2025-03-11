@@ -37,3 +37,12 @@ export const URI_REJECT_RENT = (id: number) => `http://localhost:3000/rent/reque
 export const URI_UNAVAILABLE_DATES = (id: number) => `http://localhost:3000/rent/availability/${id}`
 
 export const URI_GET_USER_HISTORY = (id: number) => `http://localhost:3000/rent/user/${id}/history`
+
+export const URI_GET_DOCUMENTS_BY_USER = (id: number) => `http://localhost:3000/document/user/${id}`
+
+export const URI_DOCUMENTS = 'http://localhost:3000/document'
+
+export const URI_UPLOAD_DOCUMENT = 'http://localhost:3000/s3/upload/document'
+
+export const URI_S3_UPLOAD_CAR = 'http://localhost:3000/s3/upload/car'
+

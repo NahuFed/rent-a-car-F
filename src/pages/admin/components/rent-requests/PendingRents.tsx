@@ -5,8 +5,9 @@ import Modal from 'react-modal';
 import { URI_PENDING_RENTS, URI_RENTS, URI_ADMIT_RENT, URI_REJECT_RENT } from '../../../../constants/endpoints-API';
 import Swal from 'sweetalert2';
 import { RentType } from '../../../../types/rent/rentType';
+import { Link } from 'react-router-dom';
 
-Modal.setAppElement('#root'); // Asegúrate de que el elemento raíz de tu aplicación esté configurado correctamente
+Modal.setAppElement('#root'); 
 
 const customStyles = {
     content: {
@@ -148,6 +149,12 @@ const PendingRents: React.FC = () => {
                                 >
                                     Reject
                                 </button>
+                                <Link to={`/admin/documents/${rent.user.id}`}
+                                    className="btn-admin bg-yellow-500 text-white px-2 py-1 rounded flex items-center"
+                                    
+                                >
+                                    Documents
+                                </Link>
                             </td>
                         </tr>
                     ))}

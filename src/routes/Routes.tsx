@@ -10,7 +10,6 @@ import ConfirmPassword from "../pages/auth/ConfirmPassword";
 import PrivateRoute from "./PrivateRoute";
 import ManagePictures from "../pages/admin/components/car-pictures/ManagePictures";
 
-// Rutas de administración adicionales
 import AdminDashboard from "../pages/admin/Admin-dashboard";
 import ManageCars from "../pages/admin/components/cars/ManageCars";
 import PendingRents from "../pages/admin/components/rent-requests/PendingRents";
@@ -20,6 +19,9 @@ import BrowseCars from "../pages/user/components/Browse-cars";
 import RentForm from "../pages/user/components/Rent-Form";
 import MyProfile from "../pages/user/components/My-profile";
 import RentalHistory from "../pages/user/components/Rental-history";
+import Documents from "../pages/user/components/documents/Document-form";
+import MyDocuments from "../pages/user/components/documents/MyDocuments";
+import ViewDocuments from "../pages/admin/components/rent-requests/ViewDocuments";
 
 interface Route {
   path: string;
@@ -58,6 +60,11 @@ const routes: Route[] = [
     path: "/rental-history",
     element: <PrivateRoute element={<RentalHistory />} requiredRole="user" />,
   },
+  {path: "/documents", element: <PrivateRoute element={<Documents />} requiredRole="user" />},
+  {
+    path: "/my-documents",
+    element: <PrivateRoute element={<MyDocuments />} requiredRole="user" />,
+  },
 
   {
     path: "/admin",
@@ -69,6 +76,7 @@ const routes: Route[] = [
       { path: "/admin/rental-requests/pending", element: <PendingRents /> },
       { path: "/admin/rental-requests/accepted", element: <AcceptedRents /> },
       { path: "/admin/rental-requests/rejected", element: <RejectedRents /> },
+      { path: "/admin/documents/:id", element: <ViewDocuments /> },
     ],
   },
 ];

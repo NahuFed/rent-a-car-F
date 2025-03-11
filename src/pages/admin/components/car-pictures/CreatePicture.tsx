@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { URI_PICTURES } from '../../../../constants/endpoints-API';
+import { URI_PICTURES, URI_S3_UPLOAD_CAR } from '../../../../constants/endpoints-API';
 import { CreatePictureDto } from '../../../../types/car-pictures/createPictureDto';
 import { CarPictureType } from '../../../../types/car-pictures/carPictureType';
 import { useParams } from 'react-router-dom';
@@ -18,9 +18,10 @@ const CreatePicture: React.FC<CreatePictureProps> = ({ onClose, onPictureCreated
         src: '',
         description: '',
         title: '',
-        type:{name: CarPictureType.OTHER}, // Usar el valor del enum
+        type: { name: CarPictureType.OTHER },
         date: new Date(),
     });
+    const [file, setFile] = useState<File | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
@@ -38,17 +39,54 @@ const CreatePicture: React.FC<CreatePictureProps> = ({ onClose, onPictureCreated
         }
     };
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setFile(e.target.files[0]);
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const payload = {
-                ...picture,                 // Ajuste para la estructura esperada
-                car: { id: picture.car } // Ajuste para la estructura esperada
-            };
-            const response = await axios.post(`${URI_PICTURES}`, payload);
-            if (response.status === 201) {
-                Swal.fire("Success", "Picture created successfully", "success");
-                await onPictureCreated();
+            if (!file) {
+                Swal.fire("Error", "Please select a file", "error");
+                return;
+            }
+            
+            const token = localStorage.getItem('token');
+            if (!token) {
+                Swal.fire("Error", "No token found", "error");
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const uploadResponse = await axios.post(URI_S3_UPLOAD_CAR, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (uploadResponse.status === 201) {
+                const fileUrl = uploadResponse.data.url;
+                
+                const payload = {
+                    ...picture,
+                    src: fileUrl,
+                    car: {id: picture.car}
+                };
+
+                const response = await axios.post(`${URI_PICTURES}`, payload, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                if (response.status === 201) {
+                    Swal.fire("Success", "Picture created successfully", "success");
+                    await onPictureCreated();
+                }
             }
         } catch (error) {
             console.error('Error creating picture:', error);
@@ -60,8 +98,8 @@ const CreatePicture: React.FC<CreatePictureProps> = ({ onClose, onPictureCreated
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <form onSubmit={handleSubmit} style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', backgroundColor: '#fff', width: '50vw' }}>
                 <div style={{ marginBottom: '10px' }}>
-                    <label>Src:</label>
-                    <input type="text" name="src" value={picture.src} onChange={handleChange} required style={{ border: '1px solid #ccc', padding: '5px', width: '100%' }} />
+                    <label>Image:</label>
+                    <input type="file" name="file" onChange={handleFileChange} required style={{ border: '1px solid #ccc', padding: '5px', width: '100%' }} />
                 </div>
                 <div style={{ marginBottom: '10px' }}>
                     <label>Description:</label>

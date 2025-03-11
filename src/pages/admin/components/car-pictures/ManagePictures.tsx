@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { URI_GET_PICTURES_BY_CAR } from '../../../../constants/endpoints-API';
 import { URI_CARS } from '../../../../constants/endpoints-API';
 
-Modal.setAppElement('#root'); // Asegúrate de que el elemento raíz de tu aplicación esté configurado correctamente
+Modal.setAppElement('#root'); 
 
 
 
@@ -23,13 +23,13 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'rgba(255, 255, 255, 0)', // Fondo blanco con transparencia
+        backgroundColor: 'rgba(255, 255, 255, 0)', 
         border: 'none',
         borderRadius: '10px',
         padding: '20px',
     },
     overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo oscuro con transparencia
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
 };
 
