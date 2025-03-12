@@ -56,6 +56,7 @@ const UpdatePictures: React.FC<UpdatePicturesProps> = ({ picture, onClose, onPic
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const token = localStorage.getItem('token');
         if (!picture || !picture.id) {
             Swal.fire("Error", "No picture selected for update", "error");
             return;
@@ -65,7 +66,12 @@ const UpdatePictures: React.FC<UpdatePicturesProps> = ({ picture, onClose, onPic
                 ...pictureData,
                 car:pictureData.car
             };
-            const response = await axios.patch(`${URI_PICTURES}/${picture.id}`, payload);
+            const response = await axios.patch(`${URI_PICTURES}/${picture.id}`, payload,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                });
             if (response.status === 200 || response.status === 204) {
                 Swal.fire("Success", "Picture updated successfully", "success");
                 await onPictureUpdated();

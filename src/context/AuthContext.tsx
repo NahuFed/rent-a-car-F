@@ -36,8 +36,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [userId, setUserId] = useState<string | null>(null);
 
     const fetchUserId = async (email: string) => {
+        const token = localStorage.getItem('token');
         try {
-            const response = await axios.get(URI_GET_USER_BY_EMAIL(email));                
+            const response = await axios.get(URI_GET_USER_BY_EMAIL(email),{
+                headers: { Authorization: `Bearer ${token}` },
+            });                
             setUserId(response.data.id);
         } catch (error) {
             console.error('Error fetching user ID:', error);

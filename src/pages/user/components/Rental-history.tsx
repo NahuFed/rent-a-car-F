@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
-import { URI_GET_USER_HISTORY } from '../../../constants/endpoints-API';
+import { URI_GET_MY_HISTORY } from '../../../constants/endpoints-API';
 import './rental-history.css';
 
 interface RentalHistoryItem {
@@ -29,28 +29,30 @@ interface RentalHistoryItem {
 }
 
 const RentalHistory: React.FC = () => {
-    const { userId } = useAuth();
+    
     const [history, setHistory] = useState<RentalHistoryItem[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchHistory = async () => {
-            if (userId) {
+
+                const token = localStorage.getItem('token');
+            
                 try {
-                    const response = await axios.get(URI_GET_USER_HISTORY(Number(userId)));
+                    const response = await axios.get(URI_GET_MY_HISTORY, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    });
                     setHistory(response.data);
                 } catch (error) {
                     console.error('Error fetching rental history:', error);
                 } finally {
                     setLoading(false);
                 }
-            } else {
-                setLoading(false);
-            }
+         
         };
 
         fetchHistory();
-    }, [userId]);
+    },[]);
 
     if (loading) {
         return <p>Loading...</p>;

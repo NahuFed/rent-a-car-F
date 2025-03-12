@@ -34,8 +34,11 @@ const RejectedRents: React.FC = () => {
     }, []);
 
     const fetchRents = async () => {
+        const token = localStorage.getItem('token');
         try {
-            const response = await axios.get(URI_REJECTED_RENTS);
+            const response = await axios.get(URI_REJECTED_RENTS,{
+                headers: { Authorization: `Bearer ${token}` }
+            });
             setRents(response.data);
         } catch (error) {
             console.error('Error fetching rejected rents:', error);

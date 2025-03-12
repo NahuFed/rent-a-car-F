@@ -19,7 +19,7 @@ const MyDocuments: React.FC = () => {
         return;
     }
     try {
-        const response = await axios.get(`http://localhost:3000/document/user/${userId}`, {
+        const response = await axios.get(`http://localhost:3000/document/user/me`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -76,12 +76,17 @@ const MyDocuments: React.FC = () => {
 
     if (formValues) {
       try {
-        await axios.patch(`http://localhost:3000/document/${doc.id}`, formValues);
+        await axios.patch(`http://localhost:3000/document/${doc.id}`, formValues,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         Swal.fire("Updated!", "Your document has been updated.", "success");
         fetchDocuments();
-      } catch (error) {
-        console.error("Error updating document:", error);
-        Swal.fire("Error", "Could not update document.", "error");
+      } catch (error: any) {
+        console.error("Error rejecting rent:", error);
+        const errorMsg = error.response?.data?.message || "There was a problem rejecting the rent";
+        Swal.fire("Error", errorMsg, "error");
       }
     }
   };

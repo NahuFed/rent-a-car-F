@@ -36,8 +36,11 @@ const PendingRents: React.FC = () => {
     }, []);
 
     const fetchRents = async () => {
+        const token = localStorage.getItem('token');
         try {
-            const response = await axios.get(URI_PENDING_RENTS);
+            const response = await axios.get(URI_PENDING_RENTS, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
             setRents(response.data);
         } catch (error) {
             console.error('Error fetching rents:', error);
@@ -61,9 +64,10 @@ const PendingRents: React.FC = () => {
                   });
                 Swal.fire("Accepted!", "Rent accepted successfully", "success");
                 fetchRents();
-            } catch (error) {
-                console.error("Error admitting rent:", error);
-                Swal.fire("Error", "There was a problem accepting the rent", "error");
+            } catch (error: any) {    
+                console.error("Error rejecting rent:", error);
+                const errorMsg = error.response?.data?.message || "There was a problem rejecting the rent";
+                Swal.fire("Error", errorMsg, "error");
             }
         }
     };

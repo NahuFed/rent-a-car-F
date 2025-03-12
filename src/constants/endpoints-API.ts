@@ -30,13 +30,19 @@ export const URI_ACCEPTED_RENTS = 'http://localhost:3000/rent/status/accepted'
 
 export const URI_REJECTED_RENTS = 'http://localhost:3000/rent/status/rejected'
 
+export const URI_FINISHED_RENTS = 'http://localhost:3000/rent/status/finished'
+
 export const URI_ADMIT_RENT = (id: number) => `http://localhost:3000/rent/requests/${id}/admit`
 
 export const URI_REJECT_RENT = (id: number) => `http://localhost:3000/rent/requests/${id}/reject`
 
+export const URI_CANCEL_RENT = (id: number) => `http://localhost:3000/rent/${id}/cancel`   
+
+export const URI_FINISH_RENT = (id: number) => `http://localhost:3000/rent/${id}/finish`
+
 export const URI_UNAVAILABLE_DATES = (id: number) => `http://localhost:3000/rent/availability/${id}`
 
-export const URI_GET_USER_HISTORY = (id: number) => `http://localhost:3000/rent/user/${id}/history`
+export const URI_GET_MY_HISTORY =  `http://localhost:3000/rent/me/history`
 
 export const URI_GET_DOCUMENTS_BY_USER = (id: number) => `http://localhost:3000/document/user/${id}`
 

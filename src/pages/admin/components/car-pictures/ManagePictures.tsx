@@ -70,6 +70,7 @@ const ManagePictures: React.FC = () => {
     };
 
     const handleDelete = async (pictureId: number) => {
+        const token = localStorage.getItem('token');
         const result = await Swal.fire({
             title: "Are you sure?",
             text: "Do you really want to delete this picture?",
@@ -81,7 +82,11 @@ const ManagePictures: React.FC = () => {
 
         if (result.isConfirmed) {
             try {
-                await axios.delete(`${URI_PICTURES}/${pictureId}`);
+                await axios.delete(`${URI_PICTURES}/${pictureId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 Swal.fire("Deleted!", "Picture deleted successfully", "success");
                 fetchPictures();
             } catch (error) {

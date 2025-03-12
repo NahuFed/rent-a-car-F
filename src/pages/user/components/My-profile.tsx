@@ -52,7 +52,9 @@ const MyProfile: React.FC = () => {
                     address,
                     country,
                 };
-                await axios.patch(URI_UPDATE_USER(Number(userId)), updatedUser);
+                await axios.patch(URI_UPDATE_USER(Number(userId)), updatedUser,{
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+                });
                 Swal.fire({
                     title: 'Success!',
                     text: 'Profile updated successfully',

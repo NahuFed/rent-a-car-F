@@ -17,6 +17,7 @@ const ViewDocuments: React.FC = () => {
         fetchUser();
     }, [id]);
     const fetchDocuments = async () => {
+        console.log(id)
         try {
             const response = await axios.get(`${URI_DOCUMENTS}/user/${id}`,{
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

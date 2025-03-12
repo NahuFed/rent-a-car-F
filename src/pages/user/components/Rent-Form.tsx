@@ -108,7 +108,9 @@ const RentForm: React.FC = () => {
         };
 
         try {
-            await axios.post(URI_RENTS, rentData);
+            await axios.post(URI_RENTS, rentData,{
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            });
             Swal.fire({
                 title: 'Success!',
                 text: 'Rent created successfully',

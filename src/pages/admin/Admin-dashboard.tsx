@@ -90,6 +90,14 @@ const AdminDashboard: React.FC = () => {
                       Accepted
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      to="/admin/rental-requests/finished"
+                      className="hover:text-gray-300 block"
+                    >
+                      Finished
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </li>
