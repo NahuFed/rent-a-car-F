@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import Header from "./layouts/Header";
+import Footer from "./layouts/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import routes from "./routes/Routes";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+function renderRoutes(routesArray: any) {
+    return routesArray.map((route: any, index: number) => {
+        if (route.children) {
+            return (
+                <Route key={index} path={route.path} element={route.element}>
+                    {renderRoutes(route.children)}
+                </Route>
+            );
+        }
+        return <Route key={index} path={route.path} element={route.element} />;
+    });
 }
 
-export default App
+function App() {
+  return (
+    <>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          <main>
+            <Routes>
+              {renderRoutes(routes)}
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
+    </>
+  );
+}
+
+export default App;
