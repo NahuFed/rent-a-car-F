@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
-import Swal from 'sweetalert2';
 import { URI_REJECTED_RENTS } from '../../../../constants/endpoints-API';
 import { RentType } from '../../../../types/rent/rentType';
 

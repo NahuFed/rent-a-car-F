@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../../context/AuthContext';
 import { URI_GET_MY_HISTORY } from '../../../constants/endpoints-API';
 import './rental-history.css';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
 import Modal from 'react-modal';
-import { URI_PENDING_RENTS, URI_RENTS, URI_ADMIT_RENT, URI_REJECT_RENT } from '../../../../constants/endpoints-API';
+import { URI_PENDING_RENTS, URI_ADMIT_RENT, URI_REJECT_RENT } from '../../../../constants/endpoints-API';
 import Swal from 'sweetalert2';
 import { RentType } from '../../../../types/rent/rentType';
 import { Link } from 'react-router-dom';

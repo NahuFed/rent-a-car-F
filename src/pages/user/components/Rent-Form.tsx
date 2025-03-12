@@ -20,7 +20,7 @@ const RentForm: React.FC = () => {
     const [dueDate, setDueDate] = useState<Date | null>(null);
     const { isAuthenticated, userId } = useAuth();
     const [unavailableDates, setUnavailableDates] = useState<DateRange[]>([]);
-    const [pictures, setPictures] = useState<string[]>([]);
+    const [_, setPictures] = useState<string[]>([]);
 
     const navigate = useNavigate();
 
