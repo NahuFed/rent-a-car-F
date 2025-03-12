@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { URI_LOGIN } from '../../constants/endpoints-API';
 import { AuthContext } from '../../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -30,8 +31,26 @@ const Login: React.FC = () => {
             } else {
                 navigate('/user-dashboard');
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Login error:', error);
+            let errorMsg = "Server is unavailable. Please try again later.";
+        
+            if (error.response) {                
+                if ((error.response.data?.message && error.response.data.message.toLowerCase().includes("Invalid credentials"))) {
+                    errorMsg = "Incorrect password or/and user";
+                } else if (error.response.data?.message) {
+                    errorMsg = error.response.data.message;
+                }
+            } else if (error.message) {
+                errorMsg = error.message;
+            }
+            
+            Swal.fire({
+                title: 'Error',
+                text: errorMsg,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
     };
 
